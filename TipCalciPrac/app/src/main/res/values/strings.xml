@@ -15,4 +15,6 @@
     <string name="percent">%</string>
     <string name="zero">0</string>
     <string name="decimalpattern">#.##</string>
+    <string name="ToastMessage">Enter Bill Total</string>
+    <string name="ToastWelcome">Welcome</string>
 </resources>

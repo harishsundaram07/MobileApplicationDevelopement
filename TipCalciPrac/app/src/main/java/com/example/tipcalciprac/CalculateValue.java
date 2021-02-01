@@ -1,47 +1,49 @@
 package com.example.tipcalciprac;
 
 import android.content.Context;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.SeekBar;
-import android.widget.TextView;
+import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
 
-public class CalculateValue {
 
-    public CalculateValue(RadioGroup radioGroup, EditText editText, int checkRadioId, TextView tipview, TextView totalview, SeekBar seekBar, Context baseContext, TextView textViewProgress) {
+public class CalculateValue extends AppCompatActivity {
+
+    public CalculateValue(DataModel dataModel, Context baseContext) {
+
         DecimalFormat df = new DecimalFormat("#.##");
         Double value;
-        if (editText.getText().length() > 0) {
-            String input=editText.getText().toString().charAt(0)=='.'?"0"+editText.getText().toString():editText.getText().toString();
-            if (checkRadioId == R.id.radioButton10) {
+        if (dataModel.getEditText().getText().length() > 0) {
+            String input=dataModel.getEditText().getText().toString().charAt(0)=='.'?"0"+dataModel.getEditText().getText().toString():dataModel.getEditText().getText().toString();
+            if (dataModel.getRadioGroup().getCheckedRadioButtonId() == R.id.radioButton10) {
                 value = Double.parseDouble(input);
-                tipview.setText(df.format(value * 0.1));
-                totalview.setText(df.format((value * 0.1) + value));
-            } else if (checkRadioId == R.id.radioButton15) {
+                dataModel.getTipview().setText(df.format(value * 0.1));
+                dataModel.getTotalview().setText(df.format((value * 0.1) + value));
+            } else if (dataModel.getRadioGroup().getCheckedRadioButtonId() == R.id.radioButton15) {
                 value = Double.parseDouble(input);
-                tipview.setText(df.format(value * 0.15));
-                totalview.setText(df.format((value * 0.15) + value));
-            } else if (checkRadioId == R.id.radioButton18) {
+                dataModel.getTipview().setText(df.format(value * 0.15));
+                dataModel.getTotalview().setText(df.format((value * 0.15) + value));
+            } else if (dataModel.getRadioGroup().getCheckedRadioButtonId() == R.id.radioButton18) {
                 value = Double.parseDouble(input);
-                tipview.setText(df.format(value * 0.18));
-                totalview.setText(df.format((value * 0.18) + value));
-            } else if (checkRadioId == R.id.radioButtonCustom) {
+                dataModel.getTipview().setText(df.format(value * 0.18));
+                dataModel.getTotalview().setText(df.format((value * 0.18) + value));
+            } else if (dataModel.getRadioGroup().getCheckedRadioButtonId() == R.id.radioButtonCustom) {
                 value = Double.parseDouble(input);
-                textViewProgress.setText(String.valueOf(seekBar.getProgress()) + "%");
-                tipview.setText(df.format((value * seekBar.getProgress()) / 100));
-                totalview.setText(df.format((value)+(value * seekBar.getProgress()) / 100));
+                dataModel.getTextViewProgress().setText(String.valueOf(dataModel.getSeekBar().getProgress()) + baseContext.getString((R.string.percent)));
+                dataModel.getTipview().setText(df.format((value * dataModel.getSeekBar().getProgress()) / 100));
+                dataModel.getTotalview().setText(df.format((value)+(value * dataModel.getSeekBar().getProgress()) / 100));
+
             }
         }
         else
         {
-            tipview.setText("");
-            totalview.setText("");
-            Toast.makeText(baseContext, "Enter Bill Total.", Toast.LENGTH_SHORT).show();
+            dataModel.getTipview().setText("");
+            dataModel.getTotalview().setText("");
+            Toast.makeText(baseContext,baseContext.getString((R.string.ToastMessage)), Toast.LENGTH_SHORT).show();
+            Log.d("TAG", "CalculateValue: ");
+
         }
-
-
     }
 }
