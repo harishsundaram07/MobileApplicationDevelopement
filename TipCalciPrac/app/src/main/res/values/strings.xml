@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Tip Calci Prac</string>
+    <string name="textViewBillDisplay">Bill Total :</string>
+    <string name="editTextInput">Enter Bill Value</string>
+    <string name="textViewTippercent">Tip% :</string>
+    <string name="radioButton10">10 %</string>
+    <string name="radioButton15">15 %</string>
+    <string name="radioButton18">18 %</string>
+    <string name="radioButtonCustom">Custom</string>
+    <string name="textViewTipDisplay">Tip :</string>
+    <string name="textViewTotalDisplay">Total :</string>
+    <string name="textViewCustomDisplay">Custom</string>
+    <string name="textViewProgress">20%</string>
+    <string name="buttonExit">Exit</string>
+    <string name="percent">%</string>
+    <string name="zero">0</string>
+    <string name="decimalpattern">#.##</string>
+</resources>
