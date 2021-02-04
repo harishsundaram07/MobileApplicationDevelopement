@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".ProfileActivity">
+
+    <TextView
+        android:id="@+id/textViewNameAP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/textview_name"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewNameResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewNameAP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewNameAP"
+        app:layout_constraintTop_toTopOf="@+id/textViewNameAP" />
+
+    <TextView
+        android:id="@+id/textViewEmailAP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/textview_email"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewNameAP"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNameAP" />
+
+    <TextView
+        android:id="@+id/textViewEmailResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewEmailAP"
+        app:layout_constraintEnd_toEndOf="@+id/textViewNameResult"
+        app:layout_constraintStart_toStartOf="@+id/textViewNameResult"
+        app:layout_constraintTop_toTopOf="@+id/textViewEmailAP" />
+
+    <TextView
+        android:id="@+id/textViewIDAP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/textview_id"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewEmailAP"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmailAP" />
+
+    <TextView
+        android:id="@+id/textViewIDResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewIDAP"
+        app:layout_constraintEnd_toEndOf="@+id/textViewEmailResult"
+        app:layout_constraintStart_toStartOf="@+id/textViewEmailResult"
+        app:layout_constraintTop_toTopOf="@+id/textViewIDAP" />
+
+    <TextView
+        android:id="@+id/textViewDeptAP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/textview_dept"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewIDAP"
+        app:layout_constraintTop_toBottomOf="@+id/textViewIDAP" />
+
+    <TextView
+        android:id="@+id/textViewDeptResultAP"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewDeptAP"
+        app:layout_constraintEnd_toEndOf="@+id/textViewIDResult"
+        app:layout_constraintStart_toStartOf="@+id/textViewIDResult"
+        app:layout_constraintTop_toTopOf="@+id/textViewDeptAP" />
+</androidx.constraintlayout.widget.ConstraintLayout>

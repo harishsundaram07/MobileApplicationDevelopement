@@ -41,8 +41,7 @@ public class CalculateValue extends AppCompatActivity {
         {
             dataModel.getTipview().setText("");
             dataModel.getTotalview().setText("");
-            Toast.makeText(baseContext,baseContext.getString((R.string.ToastMessage)), Toast.LENGTH_SHORT).show();
-            Log.d("TAG", "CalculateValue: ");
+            Toast.makeText(baseContext,baseContext.getString((R.string.ToastMessage)), Toast.LENGTH_SHORT).show();l
 
         }
     }

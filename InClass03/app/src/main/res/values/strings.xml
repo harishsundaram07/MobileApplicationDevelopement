@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">InClass03</string>
+    <string name="textview_name">Name:</string>
+    <string name="name_hint">Enter Name</string>
+    <string name="textview_email">Email:</string>
+    <string name="hint_email">Enter Email</string>
+    <string name="textview_id">ID:</string>
+    <string name="hint_enterid">Enter ID</string>
+    <string name="textview_dept">Dept:</string>
+    <string name="buttonSelect">Select</string>
+    <string name="button_submit">Submit</string>
+    <string name="rb_cs">Computer Science</string>
+    <string name="rb_sis">Software Info. Systems</string>
+    <string name="rb_bi">Bio Informatics</string>
+    <string name="rb_ds">Data Science</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="ToastRadio">Select a Department</string>
+    <string name="ToastSubmitNullError">Please enter all the details</string>
+    <string name="ToastSubmitEmailError">Please enter Valid Email Id</string>
+    <string name="ToastSubmitIDError">ID should be aplhanumeric</string>
+    <string name="title_dept">Department</string>
+    <string name="title_main">Registration</string>
+    <string name="title_profile">Profile</string>
+</resources>
