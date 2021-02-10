@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DisplayActivity">
+
+    <TextView
+        android:id="@+id/textViewTaskInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/TaskInfo"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDisplayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/CreateName"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewTaskInfo"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTaskInfo" />
+
+    <TextView
+        android:id="@+id/textViewDisplayDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/CreateDate"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewDisplayName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDisplayName" />
+
+    <TextView
+        android:id="@+id/textViewdispalypriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/Priority"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewDisplayDate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDisplayDate" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewDisplayName"
+        app:layout_constraintStart_toEndOf="@+id/textViewDisplayName"
+        app:layout_constraintTop_toTopOf="@+id/textViewDisplayName"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewDisplayDate"
+        app:layout_constraintEnd_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/textViewDisplayDate" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewdispalypriority"
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="@+id/textViewdispalypriority" />
+
+    <Button
+        android:id="@+id/buttonCancelDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
+        android:text="@string/Cancel"
+        android:textColor="@color/black"
+        app:backgroundTint="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="@+id/textViewdispalypriority"
+        app:layout_constraintTop_toBottomOf="@+id/textViewdispalypriority" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginLeft="92dp"
+        android:text="@string/Delete"
+        android:textColor="@color/black"
+        app:backgroundTint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonCancelDisplay"
+        app:layout_constraintStart_toEndOf="@+id/buttonCancelDisplay"
+        app:layout_constraintTop_toTopOf="@+id/buttonCancelDisplay" />
+</androidx.constraintlayout.widget.ConstraintLayout>

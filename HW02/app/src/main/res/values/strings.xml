@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">HW02</string>
+    <string name="upcomingTask">Upcoming Tasks</string>
+    <string name="viewTask">View Tasks</string>
+    <string name="createTask">CREATE A TASK</string>
+    <string name="textviewMaintitle">You have Tasks.</string>
+    <string name="CreateName">Name:</string>
+    <string name="CreateDate">Date:</string>
+    <string name="SetDate">Set Date</string>
+    <string name="Priority">Priority :</string>
+    <string name="high">High</string>
+    <string name="medium">Medium</string>
+    <string name="low">Low</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Submit">Submit</string>
+    <string name="ToastErrorName">Enter a Task Name.</string>
+    <string name="ToastErrorDate">Select a valid date.</string>
+    <string name="TaskInfo">Task Information</string>
+    <string name="Delete">Delete</string>
+    <string name="SelectTask">Select Task</string>
+    <string name="TODOLIST">TO DO LIST</string>
+    <string name="ToastNoTask">No Tasks created.</string>
+    <string name="ToastDelete">Task has been deleted.</string>
+    <string name="createTitle">Create Task</string>
+    <string name="DisplayTitle">Display Task</string>
+
+</resources>
