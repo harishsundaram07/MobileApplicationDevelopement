@@ -128,6 +128,13 @@ public class MainActivity extends AppCompatActivity {
             textViewDate.setText(task.date);
             textViewPriority.setText(task.priority);
         }
+        else
+        {
+            textViewTaskName.setText(getString(R.string.noUpcomigTask));
+            textViewDate.setText("");
+            textViewPriority.setText("");
+
+        }
 
 
     }

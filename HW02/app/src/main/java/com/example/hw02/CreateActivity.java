@@ -49,6 +49,7 @@ public class CreateActivity extends AppCompatActivity {
                 int day=calendar.get(calendar.DAY_OF_MONTH);
                 DatePickerDialog datePickerDialog=new DatePickerDialog(CreateActivity.this,android.R.style.Theme_Holo_Dialog_MinWidth,dateSetListener,year,month,day);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 datePickerDialog.show();
 
             }

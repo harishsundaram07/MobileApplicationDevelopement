@@ -23,5 +23,5 @@
     <string name="ToastDelete">Task has been deleted.</string>
     <string name="createTitle">Create Task</string>
     <string name="DisplayTitle">Display Task</string>
-
+    <string name="noUpcomigTask">No Upcoming Tasks</string>
 </resources>
