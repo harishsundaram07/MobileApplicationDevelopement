@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements FragmentInterface
 
     @Override
     public void home() {
+        account1=null;
         getSupportFragmentManager().popBackStack();
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,new LoginFragment(),Fragment).commit();
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements FragmentInterface
 
     @Override
     public void Editprofile(DataServices.Account account) {
-
+      account1 = account;
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,UpdateFragment.newInstance(account),Fragment).addToBackStack(null).commit();
 
 
