@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/login"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:backgroundTint="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
