@@ -14,5 +14,6 @@
     <string name="profiletitle">App Categories</string>
     <string name="detailstitle">App Details</string>
     <string name="logintitle">Login Page</string>
+    <string name="log_out">Log Out</string>
 
 </resources>
