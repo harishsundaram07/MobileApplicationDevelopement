@@ -1,5 +1,5 @@
-// Assignment : In Class 05
-//File Name : InClass05
+// Assignment : Homework 03
+//File Name : HW03
 //Full name of the student : HARIKRISHNAN SUNDARAM  & MALHAR JOSHI
 package com.example.hw03;
 
@@ -79,6 +79,7 @@ public class LoginFragment extends Fragment implements DataServices.AuthResponse
 
     @Override
     public void onSuccess(String token) {
+        Toast.makeText(getActivity(), getString(R.string.welcome), Toast.LENGTH_SHORT).show();
         fragmentInterface.goProfile(token);
     }
 

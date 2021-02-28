@@ -1,5 +1,5 @@
-// Assignment : In Class 05
-//File Name : InClass05
+// Assignment : Homework 03
+//File Name : HW03
 //Full name of the student : HARIKRISHNAN SUNDARAM  & MALHAR JOSHI
 package com.example.hw03;
 
@@ -70,7 +70,6 @@ public class CategoriesFragment extends Fragment implements DataServices.DataRes
         View view= inflater.inflate(R.layout.fragment_categories, container, false);
         DataServices.getAppCategories(token, CategoriesFragment.this);
         DataServices.getAccount(token,CategoriesFragment.this);
-        Toast.makeText(getActivity(), getString(R.string.welcome)+" "+account1.getName(), Toast.LENGTH_SHORT).show();
         textViewWelcome=view.findViewById(R.id.textViewWelcome);
         textViewWelcome.setText(getString(R.string.welcome)+" "+account1.getName());
         buttonlogout=view.findViewById(R.id.buttonlogout);
