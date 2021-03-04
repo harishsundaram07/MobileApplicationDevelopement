@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Group#B09_InClass06</string>
+    <string name="select_complexity">Select Complexity</string>
+    <string name="times">times</string>
+    <string name="generate_using_thread">Generate using thread</string>
+    <string name="generate_using_asynctask">Generate using AsyncTask</string>
+    <string name="average">Average :</string>
+    <string name="toastmessage">Select a complexity</string>
+    <string name="app">Main Activity</string>
+</resources>
