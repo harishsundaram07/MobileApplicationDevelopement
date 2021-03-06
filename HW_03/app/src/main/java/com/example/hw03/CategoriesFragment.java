@@ -91,7 +91,8 @@ public class CategoriesFragment extends Fragment implements DataServices.DataRes
 
 
     @Override
-    public void onSuccess(ArrayList data) {
+    public void onSuccess(ArrayList data)
+    {
          appsKeyset=data;
     }
 
