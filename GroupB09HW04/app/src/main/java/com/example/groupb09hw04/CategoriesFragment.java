@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +30,7 @@ import java.util.List;
  * Use the {@link CategoriesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CategoriesFragment extends Fragment{
-
+public class CategoriesFragment extends Fragment {
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -42,9 +42,12 @@ public class CategoriesFragment extends Fragment{
     LinearLayoutManager linearLayoutManager;
     RecyclerView recyclerView1;
     ProgressBar progressBarCAtegories;
+    DoCategories doCategories;
+
 
 
     View view;
+
     public CategoriesFragment() {
         // Required empty public constructor
     }
@@ -53,16 +56,20 @@ public class CategoriesFragment extends Fragment{
     public static CategoriesFragment newInstance(String token) {
         CategoriesFragment fragment = new CategoriesFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1,token);
+        args.putString(ARG_PARAM1, token);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public  void OnBackpress(boolean b) {
+        doCategories.isCancelled();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            token=getArguments().getString(ARG_PARAM1);
+            token = getArguments().getString(ARG_PARAM1);
         }
     }
 
@@ -70,10 +77,9 @@ public class CategoriesFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_categories, container, false);
-
+        view = inflater.inflate(R.layout.fragment_categories, container, false);
+        doCategories=new DoCategories();
         new DoCategories().execute(token);
-
         buttonlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,24 +92,32 @@ public class CategoriesFragment extends Fragment{
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(context instanceof FragmentInterface )
-            fragmentInterface= (FragmentInterface) context;
+        if (context instanceof FragmentInterface)
+            fragmentInterface = (FragmentInterface) context;
         else
-            throw new RuntimeException(context.toString()+" must be implemented");
+            throw new RuntimeException(context.toString() + " must be implemented");
 
     }
-
-
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(doCategories != null){
+            doCategories.cancel(true);
+        }
+    }
 
 
     //TODO AsyncTask
 
-    class DoCategories extends AsyncTask<String,Integer,Integer>  implements AdapterInterface
-    {
+     class DoCategories extends AsyncTask<String, Integer, Integer> implements AdapterInterface {
+        @Override
+        protected void onCancelled() {
+            Log.d("TAG", "onCancelled: "+doCategories.isCancelled());
+            super.onCancelled();
+        }
 
-        int success=100;
-        int failed=400;
+        int success = 100;
+        int failed = 400;
         String errormessage;
         DataServices.Account account1;
         ArrayList<String> appcategories;
@@ -112,33 +126,35 @@ public class CategoriesFragment extends Fragment{
         @Override
         protected void onPreExecute() {
             getActivity().setTitle(getString(R.string.profiletitle));
-            textViewWelcome=view.findViewById(R.id.textViewWelcome);
-            buttonlogout=view.findViewById(R.id.buttonlogout);
-            progressBarCAtegories=view.findViewById(R.id.progressBarCAtegories);
+            textViewWelcome = view.findViewById(R.id.textViewWelcome);
+            buttonlogout = view.findViewById(R.id.buttonlogout);
+            progressBarCAtegories = view.findViewById(R.id.progressBarCAtegories);
             buttonlogout.setVisibility(View.GONE);
-            recyclerView1=view.findViewById(R.id.recyclerView1);
+            recyclerView1 = view.findViewById(R.id.recyclerView1);
             recyclerView1.setHasFixedSize(true);
-            linearLayoutManager=new LinearLayoutManager(getContext());
+            linearLayoutManager = new LinearLayoutManager(getContext());
             recyclerView1.setLayoutManager(linearLayoutManager);
             progressBarCAtegories.setVisibility(View.VISIBLE);
 
 
         }
 
-
         @Override
         protected Integer doInBackground(String... strings) {
-            try {
-                publishProgress();
-                appcategories=DataServices.getAppCategories(strings[0]);
-                account1= DataServices.getAccount(strings[0]);
-                return success;
+            if(doCategories.isCancelled()!=true){
+                try {
+                    publishProgress();
+                    appcategories = DataServices.getAppCategories(strings[0]);
+                    account1 = DataServices.getAccount(strings[0]);
+                    return success;
 
-            } catch (DataServices.RequestException e) {
-                e.printStackTrace();
-                errormessage=e.getMessage();
-                return failed;
+                } catch (DataServices.RequestException e) {
+                    e.printStackTrace();
+                    errormessage = e.getMessage();
+                    return failed;
+                }
             }
+            return null;
 
         }
 
@@ -151,18 +167,18 @@ public class CategoriesFragment extends Fragment{
         @Override
         protected void onPostExecute(Integer integer) {
             progressBarCAtegories.setVisibility(View.GONE);
-            if(integer==success)
-            {
-                buttonlogout.setVisibility(View.VISIBLE);
-                textViewWelcome.setText(getString(R.string.welcome)+" "+account1.getName());
-                adapter=new RecylcerViewCategoriesAdapter(appcategories,account1,this);
-                recyclerView1.setAdapter(adapter);
-            }
-            else
-            {
-                Toast.makeText(getActivity(), errormessage, Toast.LENGTH_SHORT).show();
+            if(doCategories.isCancelled()!=true){
+                if (integer == success) {
+                    buttonlogout.setVisibility(View.VISIBLE);
+                    textViewWelcome.setText(getString(R.string.welcome) + " " + account1.getName());
+                    adapter = new RecylcerViewCategoriesAdapter(appcategories, account1, this);
+                    recyclerView1.setAdapter(adapter);
+                } else {
+                    Toast.makeText(getActivity(), errormessage, Toast.LENGTH_SHORT).show();
+                }
             }
         }
+
 
         @Override
         public void OnclickListeneradapter(int position) {

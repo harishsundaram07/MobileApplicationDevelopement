@@ -4,15 +4,19 @@
 package com.example.groupb09hw04;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements FragmentInterface{
+    
 
     public static final String fragment="Fragment";
     DataServices.Account mainaccount;
     public static final String key="KEY";
+    int counter=0;
 
 
     @Override
@@ -28,17 +32,18 @@ public class MainActivity extends AppCompatActivity implements FragmentInterface
     public void home() {
         mainaccount=null;
         //TODO
-        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,new LoginFragment(),fragment).commit();
     }
 
     @Override
     public void goProfile(String token) {
-        getSupportFragmentManager().popBackStack();
-
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, CategoriesFragment.newInstance(token),fragment).commit();
 
     }
+
+
 
     @Override
     public void goRegister() {
@@ -54,5 +59,6 @@ public class MainActivity extends AppCompatActivity implements FragmentInterface
     public void goAppDetails(DataServices.App app) {
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,AppDetailsFragment.newInstance(app),fragment).addToBackStack(null).commit();
     }
+
 
 }

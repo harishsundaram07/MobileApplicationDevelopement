@@ -26,6 +26,7 @@ public class RegisterFragment extends Fragment  {
     Button buttonSubmit;
     TextView buttonCancel;
     FragmentInterface fragmentInterface;
+    DoRegister doRegister;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -54,7 +55,8 @@ public class RegisterFragment extends Fragment  {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DoRegister().execute(editTextTextPersonName.getText().toString(),editTextTextEmailAddress2.getText().toString(),editTextTextPassword2.getText().toString());
+                doRegister=new DoRegister();
+                doRegister.execute(editTextTextPersonName.getText().toString(),editTextTextEmailAddress2.getText().toString(),editTextTextPassword2.getText().toString());
             }
         });
         buttonCancel.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +80,15 @@ public class RegisterFragment extends Fragment  {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if(doRegister != null){
+            doRegister.cancel(true);
+        }
+    }
+
    //TODO AYNCCLASS
 
     class DoRegister extends AsyncTask<String,Integer,Integer>
@@ -87,6 +98,11 @@ public class RegisterFragment extends Fragment  {
             buttonSubmit.setEnabled(false);
             buttonCancel.setEnabled(false);
 
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
         }
 
         @Override
@@ -101,25 +117,30 @@ public class RegisterFragment extends Fragment  {
 
         @Override
         protected Integer doInBackground(String... strings) {
-            try {
-                token=DataServices.register(strings[0],strings[1],strings[2]);
-                return success;
-            } catch (DataServices.RequestException e) {
-                e.printStackTrace();
-                errormessage=e.getMessage();
-                return failed;
-            }        }
+            if(doRegister.isCancelled()!=true){
+                try {
+                    token = DataServices.register(strings[0], strings[1], strings[2]);
+                    return success;
+                } catch (DataServices.RequestException e) {
+                    e.printStackTrace();
+                    errormessage = e.getMessage();
+                    return failed;
+                }
+            }
+            return null;
+        }
 
         @Override
         protected void onPostExecute(Integer integer) {
 
-            if(integer==success)
-                fragmentInterface.goProfile(token);
-            else
-            {
-                buttonSubmit.setEnabled(true);
-                buttonCancel.setEnabled(true);
-                Toast.makeText(getActivity(), errormessage, Toast.LENGTH_SHORT).show();
+            if(doRegister.isCancelled()!=true){
+                if (integer == success)
+                    fragmentInterface.goProfile(token);
+                else {
+                    buttonSubmit.setEnabled(true);
+                    buttonCancel.setEnabled(true);
+                    Toast.makeText(getActivity(), errormessage, Toast.LENGTH_SHORT).show();
+                }
             }
 
         }

@@ -27,7 +27,7 @@ public class LoginFragment extends Fragment {
     Button buttonLogin;
     TextView textCreate;
     FragmentInterface fragmentInterface;
-
+    DoLogin doLogin;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -61,7 +61,8 @@ public class LoginFragment extends Fragment {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DoLogin().execute(editTextTextEmailAddress.getText().toString(),editTextTextPassword.getText().toString());
+                doLogin=new DoLogin();
+                doLogin.execute(editTextTextEmailAddress.getText().toString(),editTextTextPassword.getText().toString());
             }
         });
         textCreate.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +85,14 @@ public class LoginFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if(doLogin != null){
+            doLogin.cancel(true);
+        }
+    }
 
 
     class DoLogin extends AsyncTask<String,Integer,Integer>
@@ -93,6 +102,10 @@ public class LoginFragment extends Fragment {
          int failed=400;
          String errormessage;
 
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
 
         @Override
         protected void onPreExecute() {
@@ -103,28 +116,30 @@ public class LoginFragment extends Fragment {
         @Override
         protected Integer doInBackground(String... strings) {
 
-            try {
-                token=DataServices.login(strings[0],strings[1]);
-                return success;
-            } catch (DataServices.RequestException e) {
-                e.printStackTrace();
-                errormessage=e.getMessage();
-                return failed;
+            if(doLogin.isCancelled()!=true){
+                try {
+                    token = DataServices.login(strings[0], strings[1]);
+                    return success;
+                } catch (DataServices.RequestException e) {
+                    e.printStackTrace();
+                    errormessage = e.getMessage();
+                    return failed;
+                }
             }
+            return null;
         }
 
         @Override
         protected void onPostExecute(Integer integer) {
-            if(integer==success)
-            {
-                Toast.makeText(getActivity(), getString(R.string.welcome), Toast.LENGTH_SHORT).show();
-                fragmentInterface.goProfile(token);
-            }
-            else
-            {
-                Toast.makeText(getActivity(), errormessage, Toast.LENGTH_SHORT).show();
-                buttonLogin.setEnabled(true);
-                textCreate.setEnabled(true);
+            if(doLogin.isCancelled()!=true) {
+                if (integer == success) {
+                    Toast.makeText(getActivity(), getString(R.string.welcome), Toast.LENGTH_SHORT).show();
+                    fragmentInterface.goProfile(token);
+                } else {
+                    Toast.makeText(getActivity(), errormessage, Toast.LENGTH_SHORT).show();
+                    buttonLogin.setEnabled(true);
+                    textCreate.setEnabled(true);
+                }
             }
 
         }

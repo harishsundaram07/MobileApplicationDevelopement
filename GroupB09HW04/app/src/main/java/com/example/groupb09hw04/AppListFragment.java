@@ -35,6 +35,7 @@ public class AppListFragment extends Fragment   {
     ApplistAdapter applistAdapter;
     View view;
     ProgressBar progressbarlist;
+    DoApplist doApplist;
 
 
     public AppListFragment() {
@@ -66,10 +67,8 @@ public class AppListFragment extends Fragment   {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
          view= inflater.inflate(R.layout.fragment_app_list, container, false);
-
-
-
-        new DoApplist().execute(token,category);
+            doApplist=new DoApplist();
+            doApplist.execute(token,category);
 
         return view;
     }
@@ -85,7 +84,14 @@ public class AppListFragment extends Fragment   {
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
+        if(doApplist != null){
+            doApplist.cancel(true);
+        }
+    }
 
 
 
@@ -99,31 +105,37 @@ public class AppListFragment extends Fragment   {
         int failed=400;
         String errormessage;
 
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
 
         @Override
         protected void onPreExecute() {
-            getActivity().setTitle(category);
-            recyclerView2=view.findViewById(R.id.recyclerView2);
-            recyclerView2.setHasFixedSize(true);
-            linearLayoutManager=new LinearLayoutManager(getContext());
-            recyclerView2.setLayoutManager(linearLayoutManager);
-            progressbarlist=view.findViewById(R.id.progressBarlist);
-            progressbarlist.setVisibility(View.VISIBLE);
+            if (doApplist.isCancelled() != true) {
+                getActivity().setTitle(category);
+                recyclerView2 = view.findViewById(R.id.recyclerView2);
+                recyclerView2.setHasFixedSize(true);
+                linearLayoutManager = new LinearLayoutManager(getContext());
+                recyclerView2.setLayoutManager(linearLayoutManager);
+                progressbarlist = view.findViewById(R.id.progressBarlist);
+                progressbarlist.setVisibility(View.VISIBLE);
 
+            }
         }
 
         @Override
         protected void onPostExecute(Integer integer) {
             progressbarlist.setVisibility(View.GONE);
 
-            if(integer==success)
-            {
-                applistAdapter=new ApplistAdapter(applistset,this);
-                recyclerView2.setAdapter(applistAdapter);
+            if (doApplist.isCancelled() != true)
+                {
+                if (integer == success) {
+                    applistAdapter = new ApplistAdapter(applistset, this);
+                    recyclerView2.setAdapter(applistAdapter);
+                } else
+                    Toast.makeText(getActivity(), errormessage, Toast.LENGTH_SHORT).show();
             }
-            else
-                Toast.makeText(getActivity(), errormessage, Toast.LENGTH_SHORT).show();
-
 
         }
 
