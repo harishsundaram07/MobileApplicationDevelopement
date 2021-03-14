@@ -78,7 +78,7 @@ public class DetailsFragment extends Fragment {
         textviewphone=view.findViewById(R.id.textviewphone);
         textviewtype=view.findViewById(R.id.textviewtype);
         textviewid=view.findViewById(R.id.textviewid);
-
+        getActivity().setTitle(R.string.Contactsinfo);
         textviewemail.setText(mcontact.email);
         textviewname.setText(mcontact.name);
         textviewphone.setText(mcontact.phone);

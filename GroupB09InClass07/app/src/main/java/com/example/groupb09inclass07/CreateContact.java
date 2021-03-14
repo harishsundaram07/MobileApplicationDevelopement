@@ -78,6 +78,8 @@ public class CreateContact extends Fragment {
         editTextTextPersonName=view.findViewById(R.id.editTextTextPersonName);
         editTextTextEmailAddress=view.findViewById(R.id.editTextTextEmailAddress);
         editTextPhone=view.findViewById(R.id.editTextPhone);
+        getActivity().setTitle(R.string.CreateProfile);
+
         view.findViewById(R.id.buttonsubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

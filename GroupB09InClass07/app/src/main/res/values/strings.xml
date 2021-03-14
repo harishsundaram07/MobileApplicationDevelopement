@@ -36,4 +36,7 @@
     <string name="confirmation">Confirm</string>
     <string name="deleteconfrim">"Are you sure you want to delete "</string>
     <string name="Contacts">"Contacts "</string>
+    <string name="Editprofile">Edit Contact</string>
+    <string name="CreateProfile">Create Contact</string>
+    <string name="Contactsinfo">Contact Info</string>
 </resources>

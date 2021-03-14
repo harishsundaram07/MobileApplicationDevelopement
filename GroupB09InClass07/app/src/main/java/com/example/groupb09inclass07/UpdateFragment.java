@@ -83,6 +83,7 @@ public class UpdateFragment extends Fragment {
         updatePersonName.setText(mcontact.name);
         updatePhone.setText(mcontact.phone);
         updateType.setText(mcontact.type);
+        getActivity().setTitle(R.string.Editprofile);
 
 
         view.findViewById(R.id.buttoncancelupdate).setOnClickListener(new View.OnClickListener() {
