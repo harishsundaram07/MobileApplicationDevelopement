@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">GroupB09#InClass07</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delete">Delete</string>
+    <string name="textview">TextView</string>
+    <string name="type">Type</string>
+    <string name="name">name</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="add_a_new_contact">Add a new contact</string>
+    <string name="Name">Name :</string>
+    <string name="email_id">Email Id :</string>
+    <string name="Type">Type :</string>
+    <string name="enter_name">Enter name</string>
+    <string name="enter_contact_number">Enter Phone number</string>
+    <string name="enter_contact_type">Enter Phone Type</string>
+    <string name="enter_email_id">Enter Email id</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="phone_no">Phone No :</string>
+    <string name="id">Id :</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="update_details">Update Details</string>
+    <string name="update_contact">Update Contact</string>
+    <string name="id1">ID :</string>
+    <string name="refresh">Refresh</string>
+    <string name="no_data_available">No Data Available</string>
+    <string name="errormessage">Something went wrong. Please try again later.</string>
+    <string name="nocontactserrormessage">No Contacts Available</string>
+    <string name="confirm">Are you sure you want to update details ?</string>
+    <string name="errorname">Please enter a name.</string>
+    <string name="errormail">Please enter the email id.</string>
+    <string name="errorphone">Please enter the contact number.</string>
+    <string name="errortype">Please enter contact type.</string>
+    <string name="ok">OK</string>
+    <string name="confirmation">Confirm</string>
+    <string name="deleteconfrim">"Are you sure you want to delete "</string>
+    <string name="Contacts">"Contacts "</string>
+</resources>

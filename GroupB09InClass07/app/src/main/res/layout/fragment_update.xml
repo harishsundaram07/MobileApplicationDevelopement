@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UpdateFragment">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/update_contact"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="19dp"
+        android:text="@string/Name"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+<TextView
+android:id="@+id/textView8"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_marginTop="32dp"
+android:text="@string/email_id"
+android:textColor="@color/black"
+app:layout_constraintStart_toStartOf="@+id/textView7"
+app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+<TextView
+android:id="@+id/textView9"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_marginTop="32dp"
+android:text="@string/phone_no"
+android:textColor="@color/black"
+app:layout_constraintStart_toStartOf="@+id/textView8"
+app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+<TextView
+android:id="@+id/textView10"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_marginTop="32dp"
+android:text="@string/Type"
+android:textColor="@color/black"
+app:layout_constraintStart_toStartOf="@+id/textView9"
+app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <EditText
+        android:id="@+id/updatePersonName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/enter_name"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+    <EditText
+        android:id="@+id/updateEmailAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/enter_email_id"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="@+id/updatePersonName"
+        app:layout_constraintStart_toStartOf="@+id/updatePersonName"
+        app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+    <EditText
+        android:id="@+id/updatePhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/enter_contact_number"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="@+id/updateEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/updateEmailAddress"
+        app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+    <EditText
+        android:id="@+id/updateType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/enter_contact_type"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
+        app:layout_constraintEnd_toEndOf="@+id/updatePhone"
+        app:layout_constraintStart_toStartOf="@+id/updatePhone"
+        app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textViewIdDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/updatePersonName"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/buttonupdate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="@string/update_details"
+        app:backgroundTint="@color/material_on_background_emphasis_high_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateType" />
+
+    <Button
+        android:id="@+id/buttoncancelupdate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/cancel"
+        app:backgroundTint="@color/material_on_surface_disabled"
+        app:layout_constraintEnd_toEndOf="@+id/buttonupdate"
+        app:layout_constraintStart_toStartOf="@+id/buttonupdate"
+        app:layout_constraintTop_toBottomOf="@+id/buttonupdate" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/id1"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+    
