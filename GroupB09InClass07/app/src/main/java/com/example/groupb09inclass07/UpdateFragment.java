@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -117,8 +116,15 @@ public class UpdateFragment extends Fragment {
                                                 getActivity().runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
-                                                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                                                        fragmentInterface.goDetails(mcontact);
+                                                        AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                                                        builder
+                                                                .setMessage(message)
+                                                                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialog, int which) {
+                                                                    }
+                                                                });
+                                                        builder.create().show();                                                        fragmentInterface.goDetails(mcontact);
 
                                                     }
                                                 });
@@ -131,8 +137,15 @@ public class UpdateFragment extends Fragment {
                                                 getActivity().runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
-                                                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                                                    }
+                                                        AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                                                        builder
+                                                                .setMessage(message)
+                                                                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialog, int which) {
+                                                                    }
+                                                                });
+                                                        builder.create().show();                                                    }
                                                 });
                                             }
                                         }

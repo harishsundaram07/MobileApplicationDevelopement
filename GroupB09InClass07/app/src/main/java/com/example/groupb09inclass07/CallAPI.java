@@ -81,7 +81,7 @@ public class CallAPI {
                 {
                     status=failed;
                     body = responseBody.string();
-                    callHandler.onFailure(null,status,body);
+                    callHandler.onFailure(null,status,nofunctionalerror);
                 }
 
 

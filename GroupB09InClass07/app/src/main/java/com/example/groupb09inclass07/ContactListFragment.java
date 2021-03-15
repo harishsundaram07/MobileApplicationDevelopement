@@ -4,9 +4,11 @@
 package com.example.groupb09inclass07;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -112,8 +113,15 @@ public class ContactListFragment extends Fragment implements FunctionInterface{
                             if (status == CallAPI.failed) {
                                 textviewnodata.setVisibility(View.VISIBLE);
                                 Log.d("TAG", "run: ");
-                                Toast.makeText(getActivity(), message.equalsIgnoreCase(getString(R.string.nocontactserrormessage)) ? message : getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
-                            }
+                                AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                                builder
+                                        .setMessage(message)
+                                        .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                            }
+                                        });
+                                builder.create().show();                            }
                         }
                     });
                 }
@@ -153,7 +161,15 @@ public class ContactListFragment extends Fragment implements FunctionInterface{
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                            builder
+                                    .setMessage(message)
+                                    .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                            builder.create().show();
                             contactlist.remove(contactlist.get(adapterPosition));
                             //contactAdapter.notifyDataSetChanged();
                             recyclerviewAdapter.notifyDataSetChanged();

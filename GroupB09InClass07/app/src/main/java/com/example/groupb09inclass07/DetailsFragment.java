@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,6 +113,15 @@ public class DetailsFragment extends Fragment {
                                             getActivity().runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
+                                                    AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                                                    builder
+                                                            .setMessage(message)
+                                                            .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                }
+                                                            });
+                                                    builder.create().show();
                                                     fragmentInterface.gohome();
                                                 }
                                             });
@@ -126,8 +134,15 @@ public class DetailsFragment extends Fragment {
                                             getActivity().runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                                                }
+                                                    AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                                                    builder
+                                                            .setMessage(message)
+                                                            .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                }
+                                                            });
+                                                    builder.create().show();                                                }
                                             });
                                         }
                                     }
