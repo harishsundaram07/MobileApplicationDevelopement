@@ -25,7 +25,7 @@ public class UserAdapter  extends ArrayAdapter<User> {
         {
             convertView= LayoutInflater.from(getContext()).inflate(R.layout.temp,parent,false);
             ViewHolder viewHolder=new ViewHolder();
-            viewHolder.textViewl=convertView.findViewById(R.id.textViewl);
+            viewHolder.textViewl=convertView.findViewById(R.id.textViewCities);
             viewHolder.textViewm=convertView.findViewById(R.id.textViewm);
             viewHolder.textViews=convertView.findViewById(R.id.textViews);
             convertView.setTag(viewHolder);

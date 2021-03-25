@@ -3,7 +3,6 @@ package com.example.demoapplication;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +15,7 @@ public class UserRecycleViewHolder extends RecyclerView.ViewHolder {
 
     public UserRecycleViewHolder(@NonNull View itemView) {
         super(itemView);
-        textViewl=itemView.findViewById(R.id.textViewl);
+        textViewl=itemView.findViewById(R.id.textViewCities);
         textViewm=itemView.findViewById(R.id.textViewm);
         textViews=itemView.findViewById(R.id.textViews);
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AddForumFragment">
+
+    <EditText
+        android:id="@+id/edittitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:ems="10"
+        android:hint="@string/forum_title"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextdesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/forum_description"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/edittitle"
+        app:layout_constraintStart_toStartOf="@+id/edittitle"
+        app:layout_constraintTop_toBottomOf="@+id/edittitle" />
+
+    <Button
+        android:id="@+id/buttonSubmit1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/submit"
+        app:backgroundTint="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="@+id/editTextdesc"
+        app:layout_constraintStart_toStartOf="@+id/editTextdesc"
+        app:layout_constraintTop_toBottomOf="@+id/editTextdesc" />
+
+    <TextView
+        android:id="@+id/buttonCancel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@android:string/cancel"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSubmit1"
+        app:layout_constraintStart_toStartOf="@+id/buttonSubmit1"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSubmit1" />
+</androidx.constraintlayout.widget.ConstraintLayout>

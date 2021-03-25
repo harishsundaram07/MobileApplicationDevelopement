@@ -111,6 +111,11 @@ public class AppListFragment extends Fragment   {
         }
 
         @Override
+        protected void onCancelled(Integer integer) {
+            super.onCancelled(integer);
+        }
+
+        @Override
         protected void onPreExecute() {
             if (doApplist.isCancelled() != true) {
                 getActivity().setTitle(category);

@@ -80,7 +80,8 @@ public class CreateActivity extends AppCompatActivity {
                 } else if(editTextTextPersonName.getText().length()==0)
                     Toast.makeText(getBaseContext(),getString(R.string.ToastErrorName),Toast.LENGTH_SHORT).show();
                 else if(textViewDate2.getText().length()==0)
-                    Toast.makeText(getBaseContext(),getString(R.string.ToastErrorDate),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(),
+                            getString(R.string.ToastErrorDate),Toast.LENGTH_SHORT).show();
             }
         });
 
