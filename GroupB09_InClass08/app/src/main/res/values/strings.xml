@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">GroupB09_InClass08</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_email_id">Enter Email id</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="login">Login</string>
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="welcome">Welcome!!!</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="submit">Submit</string>
+    <string name="log_out">Log out</string>
+    <string name="new_forum">New Forum</string>
+    <string name="textview">TextView</string>
+    <string name="temp">|</string>
+    <string name="todo">TODO</string>
+    <string name="likes">likes</string>
+    <string name="forum_title">Forum Title</string>
+    <string name="forum_description">Forum Description</string>
+    <string name="commedntadded">Comment added Succesfully</string>
+    <string name="commedntdeleted">Comment deleted succesfully</string>
+    <string name="deleteconfrim">Are you sure you want to delete?</string>
+    <string name="confirmation">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="addforum">New forum</string>
+    <string name="errortitle">Please enter title value</string>
+    <string name="errordesc">Please enter description</string>
+    <string name="successforum">Forum added successfully.</string>
+    <string name="formtitl">Forums</string>
+    <string name="formtitlw">Forum</string>
+    <string name="comments">comments</string>
+    <string name="write_a_comment">Write a Comment</string>
+    <string name="post">Post</string>
+    <string name="OK">OK</string>
+    <string name="forum">forum</string>
+    <string name="user">user</string>
+    <string name="errormessage">Something went wrong. Please try again later.</string>
+    <string name="forumdeleted">Forum deleted successfully.</string>
+</resources>

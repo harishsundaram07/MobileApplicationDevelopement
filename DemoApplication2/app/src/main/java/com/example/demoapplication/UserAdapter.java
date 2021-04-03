@@ -12,8 +12,8 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class UserAdapter  extends ArrayAdapter<User> {
-    public UserAdapter(@NonNull Context context, int resource, @NonNull List<User> objects) {
+public class UserAdapter  extends ArrayAdapter<Person> {
+    public UserAdapter(@NonNull Context context, int resource, @NonNull List<Person> objects) {
         super(context, resource, objects);
     }
 
@@ -26,16 +26,13 @@ public class UserAdapter  extends ArrayAdapter<User> {
             convertView= LayoutInflater.from(getContext()).inflate(R.layout.temp,parent,false);
             ViewHolder viewHolder=new ViewHolder();
             viewHolder.textViewl=convertView.findViewById(R.id.textViewCities);
-            viewHolder.textViewm=convertView.findViewById(R.id.textViewm);
-            viewHolder.textViews=convertView.findViewById(R.id.textViews);
+
             convertView.setTag(viewHolder);
         }
 
-        User user=getItem(position);
+        Person user=getItem(position);
         ViewHolder viewHolder= (ViewHolder) convertView.getTag();
-        viewHolder.textViewl.setText(user.name);
-        viewHolder.textViewm.setText(Integer.toString(user.age));
-        viewHolder.textViews.setText(user.gender);
+        viewHolder.textViewl.setText(user.getName());
         return convertView;
     }
 

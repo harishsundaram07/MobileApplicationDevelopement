@@ -1,3 +1,7 @@
+// Assignment : Homework 05
+//File Name : GroupB09_HW05
+//Full name of the student : HARIKRISHNAN SUNDARAM  & MALHAR JOSHI
+
 package com.example.groupb09_hw05;
 
 import android.content.Context;
@@ -76,6 +80,7 @@ public class ForecastFragment extends Fragment {
         view= inflater.inflate(R.layout.fragment_forecast, container, false);
         recyclerforecast=view.findViewById(R.id.recyclerforecast);
         recyclerforecast.setHasFixedSize(true);
+        getActivity().setTitle(R.string.weatherforecast);
         textVietitle1=view.findViewById(R.id.textVietitle1);
         textVietitle1.setText(mcity+", "+mcountry);
 

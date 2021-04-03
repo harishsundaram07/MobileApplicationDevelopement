@@ -1,3 +1,10 @@
+// Assignment : Homework 05
+//File Name : GroupB09_HW05
+//Full name of the student : HARIKRISHNAN SUNDARAM  & MALHAR JOSHI
+
+
+
+
 package com.example.groupb09_hw05;
 
 import android.util.Log;
@@ -42,7 +49,12 @@ public class CallAPI {
     public static void getcurrent(String city,CallHandler callHandler){
 
 
-        HttpUrl httpUrl=HttpUrl.parse(Urlhostcurrent).newBuilder().addPathSegments(weather).addQueryParameter("q",city.toUpperCase()).addQueryParameter("appid",currentApiKey).build();
+        HttpUrl httpUrl=HttpUrl.parse(Urlhostcurrent).newBuilder()
+                .addPathSegments(weather)
+                .addQueryParameter("q",city.toUpperCase())
+                .addQueryParameter("appid",currentApiKey)
+                .addQueryParameter("units","imperial")
+                .build();
         Request request=new Request.Builder().url(httpUrl).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -79,7 +91,11 @@ public class CallAPI {
     public static void getforecast(String city,CallHandler callHandler){
 
 
-        HttpUrl httpUrl=HttpUrl.parse(Urlhostcurrent).newBuilder().addPathSegments(forecast).addQueryParameter("q",city.toUpperCase()).addQueryParameter("appid",currentApiKey).build();
+        HttpUrl httpUrl=HttpUrl.parse(Urlhostcurrent).newBuilder().addPathSegments(forecast)
+                .addQueryParameter("q",city.toUpperCase())
+                .addQueryParameter("appid",currentApiKey)
+                .addQueryParameter("units","imperial")
+                .build();
         Request request=new Request.Builder().url(httpUrl).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override

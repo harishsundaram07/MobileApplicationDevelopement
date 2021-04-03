@@ -1,3 +1,8 @@
+// Assignment : Homework 05
+//File Name : GroupB09_HW05
+//Full name of the student : HARIKRISHNAN SUNDARAM  & MALHAR JOSHI
+
+
 package com.example.groupb09_hw05;
 
 import android.view.LayoutInflater;
@@ -35,9 +40,9 @@ public class CityForecastRecylerAdapter extends RecyclerView.Adapter<ForecastVie
     public void onBindViewHolder(@NonNull ForecastViewHolder holder, int position) {
 
         holder.textViewdate.setText(list.get(position).dt_txt);
-        holder.textViewtemp.setText(String.valueOf(df.format((1.8*(list.get(position).main.temp - 273))+ 32))+" "+view.getContext().getString(R.string.F));
-        holder.textViewmax.setText(view.getContext().getString(R.string.max)+" "+(String.valueOf(df.format((1.8*(list.get(position).main.temp_max - 273))+ 32)))+" "+view.getContext().getString(R.string.F));
-        holder.textViewmin.setText(view.getContext().getString(R.string.min)+" "+(String.valueOf(df.format((1.8*(list.get(position).main.temp_min - 273))+ 32)))+" "+view.getContext().getString(R.string.F));
+        holder.textViewtemp.setText(String.valueOf(list.get(position).main.temp)+" "+view.getContext().getString(R.string.F));
+        holder.textViewmax.setText(view.getContext().getString(R.string.max)+" "+(list.get(position).main.temp_max)+" "+view.getContext().getString(R.string.F));
+        holder.textViewmin.setText(view.getContext().getString(R.string.min)+" "+(list.get(position).main.temp_min)+" "+view.getContext().getString(R.string.F));
         holder.textViewHumidityf.setText(view.getContext().getString(R.string.humidity)+": "+String.valueOf(list.get(position).main.humidity)+view.getContext().getString(R.string.percent));
         holder.textViewdesc.setText(list.get(position).weather.get(0).description.toUpperCase());
         Picasso.get().load("https://openweathermap.org/img/wn/"+list.get(position).weather.get(0).icon+"@2x.png").into((holder.imageViewforecast) );

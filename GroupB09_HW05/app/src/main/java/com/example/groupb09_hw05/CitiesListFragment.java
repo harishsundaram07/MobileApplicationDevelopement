@@ -1,3 +1,7 @@
+// Assignment : Homework 05
+//File Name : GroupB09_HW05
+//Full name of the student : HARIKRISHNAN SUNDARAM  & MALHAR JOSHI
+
 package com.example.groupb09_hw05;
 
 import android.content.Context;
@@ -60,6 +64,7 @@ public class CitiesListFragment extends Fragment implements FunctionInterface {
         view= inflater.inflate(R.layout.fragment_cities_list, container, false);
         cities=Data.cities;
         recyclerViewcity=view.findViewById(R.id.recylcerviewcity);
+        getActivity().setTitle(R.string.cities);
         recyclerViewcity.setHasFixedSize(true);
         citylistRecylerAdapter=new CitylistRecylerAdapter(cities,  this);
         linearLayoutManager = new LinearLayoutManager(view.getContext());

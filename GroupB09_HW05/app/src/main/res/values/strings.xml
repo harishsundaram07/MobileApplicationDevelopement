@@ -18,6 +18,9 @@
     <string name="F">F</string>
     <string name="max">"Max: "</string>
     <string name="min">"Min: "</string>
+    <string name="cities">Cities</string>
+    <string name="currentweather">Current Weather</string>
+    <string name="weatherforecast">Weather Forecast</string>
 
 
 </resources>

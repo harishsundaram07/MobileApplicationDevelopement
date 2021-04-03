@@ -1,3 +1,10 @@
+// Assignment : Homework 05
+//File Name : GroupB09_HW05
+//Full name of the student : HARIKRISHNAN SUNDARAM  & MALHAR JOSHI
+
+
+
+
 package com.example.groupb09_hw05;
 
 import android.content.Context;
@@ -96,6 +103,7 @@ public class CityCurrentFragment extends Fragment {
         textViewWindspeed=view.findViewById(R.id.textViewWindspeed);
         textViewWinddegree=view.findViewById(R.id.textViewWinddegree);
         textViewCloudiness=view.findViewById(R.id.textViewCloudiness);
+        getActivity().setTitle(R.string.currentweather);
         textViewTitle=view.findViewById(R.id.textViewTitle);
         ImageView imageViewcurrent=view.findViewById(R.id.imageViewcurrent);
         textViewTitle.setText(mcity+", "+mcountry);
@@ -111,9 +119,9 @@ public class CityCurrentFragment extends Fragment {
                             @Override
                             public void run() {
 
-                                textViewTemperature.setText(String.valueOf(df.format(1.8 * (weatherCurrent.main.temp - 273) + 32)) + " " + getString(R.string.F));
-                                textViewTemperatureMax.setText(String.valueOf(df.format((1.8 * (weatherCurrent.main.temp_max - 273)) + 32)) + " " + getString(R.string.F));
-                                textViewTemperatureMin.setText(String.valueOf(df.format((1.8 * (weatherCurrent.main.temp_min - 273)) + 32)) + " " + getString(R.string.F));
+                                textViewTemperature.setText(String.valueOf(weatherCurrent.main.temp) + " " + getString(R.string.F));
+                                textViewTemperatureMax.setText(String.valueOf(weatherCurrent.main.temp_max) + " " + getString(R.string.F));
+                                textViewTemperatureMin.setText(String.valueOf(weatherCurrent.main.temp_min) + " " + getString(R.string.F));
                                 textViewDescription.setText((weatherCurrent.weather.get(0).description));
                                 textViewHumidity.setText(String.valueOf(weatherCurrent.main.humidity) + getString(R.string.percent));
                                 textViewWindspeed.setText(String.valueOf(weatherCurrent.wind.speed) + " " + getString(R.string.mileshe));
