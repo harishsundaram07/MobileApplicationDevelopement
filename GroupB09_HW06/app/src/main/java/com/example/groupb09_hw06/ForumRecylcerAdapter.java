@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 class ForumRecyclerAdapter extends RecyclerView.Adapter<Forumviewholder>{
@@ -42,10 +44,16 @@ class ForumRecyclerAdapter extends RecyclerView.Adapter<Forumviewholder>{
 
     @Override
     public void onBindViewHolder(@NonNull Forumviewholder holder, int position) {
+        Collections.sort(forumlist, new Comparator<Forum>() {
+            @Override
+            public int compare(Forum o1, Forum o2) {
+                return (-1)*(o1.getDate().compareTo(o2.getDate()));
+            }
+        });
         holder.textViewtitle.setText(forumlist.get(position).getTitle());
         holder.textViewcreatedBy.setText(forumlist.get(position).getUsername());
         holder.textViewdate.setText(forumlist.get(position).getDate());
-        holder.textViewdescription.setText(forumlist.get(position).getDescription());
+        holder.textViewdescription.setText(forumlist.get(position).getDescription().length()>200?forumlist.get(position).getDescription().substring(0,199):forumlist.get(position).getDescription());
         holder.forumId=forumlist.get(position).getForumid();
         holder.forum=forumlist.get(position);
         holder.muuid=muuid;

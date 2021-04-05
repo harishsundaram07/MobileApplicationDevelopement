@@ -6,9 +6,12 @@
 package com.example.groupb09_hw06;
 
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +19,24 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginFragment extends Fragment {
 
@@ -31,6 +46,10 @@ public class LoginFragment extends Fragment {
     EditText editTextTextEmailAddress;
     EditText editTextTextPassword;
     private FirebaseAuth mAuth;
+    SignInButton signInGoogle;
+     private GoogleSignInClient googleSignInclient;
+
+    private FirebaseFirestore tempdb;
 
 
     @Override
@@ -51,6 +70,12 @@ public class LoginFragment extends Fragment {
         editTextTextEmailAddress=view.findViewById(R.id.editTextTextEmailAddress);
         editTextTextPassword=view.findViewById(R.id.editTextTextPassword);
         getActivity().setTitle(getString(R.string.login));
+
+
+
+
+
+
 
         view.findViewById(R.id.TextCreate).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,9 +140,94 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        signInGoogle=view.findViewById(R.id.signInGoogle);
 
+        GoogleSignInOptions googleSignInOptions=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getActivity().getString(R.string.clientid)).requestEmail().build();
+        googleSignInclient= GoogleSignIn.getClient(getActivity(),googleSignInOptions);
+
+        signInGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=googleSignInclient.getSignInIntent();
+                startActivityForResult(intent,100);
+               }
+        });
 
         return view;
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==100)
+        {
+            Task<GoogleSignInAccount> googleSignInAccountTask=GoogleSignIn.getSignedInAccountFromIntent(data);
+            if(googleSignInAccountTask.isSuccessful())
+            {
+                try {
+                    GoogleSignInAccount googleSignInAccount=googleSignInAccountTask.getResult(ApiException.class);
+
+
+                    if(googleSignInAccount!=null)
+                    {
+                        AuthCredential authCredential= GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(),null);
+                        mAuth=FirebaseAuth.getInstance();
+                        mAuth.signInWithCredential(authCredential).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                if(task.isSuccessful())
+                                {
+                                    User user=new User();
+                                    user.setName(mAuth.getCurrentUser().getDisplayName().toString());
+                                    user.setEmailid(mAuth.getCurrentUser().getEmail().toString());
+                                    user.setUuid(mAuth.getUid());
+                                    tempdb= FirebaseFirestore.getInstance();
+                                    tempdb.collection(getString(R.string.user)).document(mAuth.getUid()).set(user).addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(view.getContext(), getString(R.string.welcome), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(getActivity(), new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    Toast.makeText(getActivity(), getString(R.string.welcome), Toast.LENGTH_SHORT).show();
+
+                                    fragmentInterface.goList(mAuth.getUid());
+
+                                }
+                                else
+                                {
+                                    AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                                    builder
+                                            .setMessage(task.getException().getMessage())
+                                            .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                }
+                                            });
+                                    builder.create().show();
+                                }
+                            }
+                        });
+                    }
+                } catch (ApiException e) {
+                    e.printStackTrace();
+                }
+            }
+            else
+            {
+             //   Log.d(TAG, "onActivityResult: "+googleSignInAccountTask.getResult().toString());
+                Toast.makeText(getActivity(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+
+            }
+        }
+    }
+
+
 }

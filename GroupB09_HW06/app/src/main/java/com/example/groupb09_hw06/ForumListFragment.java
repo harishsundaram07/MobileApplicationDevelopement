@@ -21,6 +21,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -52,6 +55,7 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
     FunctionInterface functionInterface;
     FragmentInterface fragmentInterface;
     TextView textViewnoforum;
+    private GoogleSignInClient googleSignInclient1;
 
 
 
@@ -76,6 +80,8 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
         return fragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +89,11 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
             muuid =  getArguments().getString(ARG_PARAM1);
 
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -98,7 +109,6 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
         textViewnoforum=view.findViewById(R.id.textViewnoforum);
         textViewnoforum.setVisibility(View.GONE);
 
-        Log.d("TAG", "onCreateView: "+muuid);
 
 
 
@@ -113,7 +123,6 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
                     {
                          mforum=new Forum();
                          mforum=document.toObject(Forum.class);
-                        Log.d("TAG", "onEvent: "+document.getData());
                         forumList.add(mforum);
                     }
                     forumRecyclerAdapter=new ForumRecyclerAdapter(forumList,functionInterface,muuid);
@@ -134,7 +143,28 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
         view.findViewById(R.id.buttonLogout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentInterface.goHome();
+
+                googleSignInclient1= GoogleSignIn.getClient(getActivity(), GoogleSignInOptions.DEFAULT_SIGN_IN);
+
+                if(googleSignInclient1!=null)
+                {
+                    googleSignInclient1.signOut().addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            if(view.getContext()!=null)
+                                Toast.makeText(view.getContext(), getString(R.string.logged_out), Toast.LENGTH_SHORT).show();
+                            fragmentInterface.goHome();
+
+                        }
+                    }).addOnFailureListener(getActivity(), new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            if(view.getContext()!=null)
+                                Toast.makeText(view.getContext(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
             }
         });
         view.findViewById(R.id.buttonAddForum).setOnClickListener(new View.OnClickListener() {
@@ -151,7 +181,7 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
                 }).addOnFailureListener(getActivity(), new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getActivity(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -171,13 +201,13 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
         mdb3.collection(getString(R.string.forum)).document(mforumid).delete().addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getActivity(), getString(R.string.forumdeleted), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), getString(R.string.forumdeleted), Toast.LENGTH_SHORT).show();
 
             }
         }).addOnFailureListener(getActivity(), new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -189,7 +219,6 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
             forum.getLikedby().add(muuid);
         else
             forum.getLikedby().remove(muuid);
-        Log.d("TAG", "likedby: "+muuid+"- "+forum.getForumid()+"- "+like);
         mdb3=FirebaseFirestore.getInstance();
         String likedby="likedby";
         mdb3.collection(getString(R.string.forum)).document(forum.forumid).update(likedby,forum.getLikedby()).addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
@@ -201,7 +230,7 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
         }).addOnFailureListener(getActivity(), new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -219,11 +248,13 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
         }).addOnFailureListener(getActivity(), new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
             }
         });
 
     }
+
+
 
 
 }

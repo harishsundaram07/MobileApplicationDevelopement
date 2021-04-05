@@ -36,7 +36,8 @@
     <string name="errormessage">Something went wrong. Please try again later.</string>
     <string name="forumdeleted">Forum deleted successfully.</string>
     <string name="no_forums_available">No Forums available</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="clientid">820341209723-92q63dcl2m1s0ou9oj41e97rp755c3r8.apps.googleusercontent.com</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_comments">No Comments .</string>
+    <string name="logged_out">Logged out successfully...</string>
 </resources>
