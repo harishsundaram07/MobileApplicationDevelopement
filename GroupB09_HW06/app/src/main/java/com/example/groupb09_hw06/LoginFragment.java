@@ -69,7 +69,7 @@ public class LoginFragment extends Fragment {
         view= inflater.inflate(R.layout.fragment_login, container, false);
         editTextTextEmailAddress=view.findViewById(R.id.editTextTextEmailAddress);
         editTextTextPassword=view.findViewById(R.id.editTextTextPassword);
-        getActivity().setTitle(getString(R.string.login));
+        getActivity().setTitle(view.getContext().getString(R.string.login));
 
 
 
@@ -95,7 +95,7 @@ public class LoginFragment extends Fragment {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful())
                                     {
-                                        Toast.makeText(getActivity(), getString(R.string.welcome), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getActivity(), view.getContext().getString(R.string.welcome), Toast.LENGTH_SHORT).show();
                                         fragmentInterface.goList(mAuth.getUid());
                                     }
                                     else
@@ -103,7 +103,7 @@ public class LoginFragment extends Fragment {
                                         AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
                                         builder
                                                 .setMessage(task.getException().getMessage())
-                                                .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+                                                .setPositiveButton(view.getContext().getString(R.string.OK), new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
                                                     }
@@ -117,8 +117,8 @@ public class LoginFragment extends Fragment {
                 {
                     AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
                     builder
-                            .setMessage(getString(R.string.enter_email_id))
-                            .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+                            .setMessage(view.getContext().getString(R.string.enter_email_id))
+                            .setPositiveButton(view.getContext().getString(R.string.OK), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                 }
@@ -129,8 +129,8 @@ public class LoginFragment extends Fragment {
                 {
                     AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
                     builder
-                            .setMessage(getString(R.string.enter_password))
-                            .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+                            .setMessage(view.getContext().getString(R.string.enter_password))
+                            .setPositiveButton(view.getContext().getString(R.string.OK), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                 }
@@ -185,10 +185,10 @@ public class LoginFragment extends Fragment {
                                     user.setEmailid(mAuth.getCurrentUser().getEmail().toString());
                                     user.setUuid(mAuth.getUid());
                                     tempdb= FirebaseFirestore.getInstance();
-                                    tempdb.collection(getString(R.string.user)).document(mAuth.getUid()).set(user).addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
+                                    tempdb.collection(view.getContext().getString(R.string.user)).document(mAuth.getUid()).set(user).addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            Toast.makeText(view.getContext(), getString(R.string.welcome), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(view.getContext(), view.getContext().getString(R.string.welcome), Toast.LENGTH_SHORT).show();
                                         }
                                     }).addOnFailureListener(getActivity(), new OnFailureListener() {
                                         @Override
@@ -196,7 +196,7 @@ public class LoginFragment extends Fragment {
                                             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
-                                    Toast.makeText(getActivity(), getString(R.string.welcome), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), view.getContext().getString(R.string.welcome), Toast.LENGTH_SHORT).show();
 
                                     fragmentInterface.goList(mAuth.getUid());
 
@@ -206,7 +206,7 @@ public class LoginFragment extends Fragment {
                                     AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
                                     builder
                                             .setMessage(task.getException().getMessage())
-                                            .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+                                            .setPositiveButton(view.getContext().getString(R.string.OK), new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                 }
@@ -223,7 +223,7 @@ public class LoginFragment extends Fragment {
             else
             {
              //   Log.d(TAG, "onActivityResult: "+googleSignInAccountTask.getResult().toString());
-                Toast.makeText(getActivity(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), view.getContext().getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
 
             }
         }

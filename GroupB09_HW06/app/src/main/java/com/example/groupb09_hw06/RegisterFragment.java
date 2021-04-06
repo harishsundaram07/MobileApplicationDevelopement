@@ -60,7 +60,7 @@ public class RegisterFragment extends Fragment {
         editTextTextPersonName=view.findViewById(R.id.editTextTextPersonName);
         editTextTextEmailAddress2=view.findViewById(R.id.editTextTextEmailAddress2);
         editTextTextPassword2=view.findViewById(R.id.editTextTextPassword2);
-        getActivity().setTitle(getString(R.string.create_a_new_account));
+        getActivity().setTitle(view.getContext().getString(R.string.create_a_new_account));
         String uuid;
         view.findViewById(R.id.buttonSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,10 +78,10 @@ public class RegisterFragment extends Fragment {
                                 public void onSuccess(AuthResult authResult) {
                                     user.setUuid(mAuth1.getUid());
                                     mdb1=FirebaseFirestore.getInstance();
-                                    mdb1.collection(getString(R.string.user)).document(mAuth1.getUid()).set(user).addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
+                                    mdb1.collection(view.getContext().getString(R.string.user)).document(mAuth1.getUid()).set(user).addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            Toast.makeText(getContext(), getString(R.string.welcome), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), view.getContext().getString(R.string.welcome), Toast.LENGTH_SHORT).show();
                                         }
                                     }).addOnFailureListener(getActivity(), new OnFailureListener() {
                                         @Override
@@ -98,7 +98,7 @@ public class RegisterFragment extends Fragment {
                             AlertDialog.Builder builder=new AlertDialog.Builder(view.getContext());
                             builder
                                     .setMessage(e.getMessage())
-                                    .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+                                    .setPositiveButton(view.getContext().getString(R.string.OK), new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                         }
@@ -112,8 +112,8 @@ public class RegisterFragment extends Fragment {
                 else if(editTextTextEmailAddress2.getText().length()<=0){
                     AlertDialog.Builder builder=new AlertDialog.Builder(view.getContext());
                     builder
-                            .setMessage(getString(R.string.enter_email_id))
-                            .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+                            .setMessage(view.getContext().getString(R.string.enter_email_id))
+                            .setPositiveButton(view.getContext().getString(R.string.OK), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                 }
@@ -125,7 +125,7 @@ public class RegisterFragment extends Fragment {
                     AlertDialog.Builder builder=new AlertDialog.Builder(view.getContext());
                     builder
                             .setMessage(R.string.enter_password)
-                            .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+                            .setPositiveButton(view.getContext().getString(R.string.OK), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                 }
@@ -137,7 +137,7 @@ public class RegisterFragment extends Fragment {
                     AlertDialog.Builder builder=new AlertDialog.Builder(view.getContext());
                     builder
                             .setMessage(R.string.enter_name)
-                            .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
+                            .setPositiveButton(view.getContext().getString(R.string.OK), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                 }

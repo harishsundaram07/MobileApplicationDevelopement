@@ -75,7 +75,7 @@ public class NewForumFragment extends Fragment {
         view= inflater.inflate(R.layout.fragment_new_forum, container, false);
         editTextdesc=view.findViewById(R.id. editTextdesc);
         edittitle=view.findViewById(R.id. edittitle);
-        getActivity().setTitle(getString(R.string.addforum));
+        getActivity().setTitle(view.getContext().getString(R.string.addforum));
 
         view.findViewById(R.id.buttonSubmit1).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,17 +92,17 @@ public class NewForumFragment extends Fragment {
                     forum.setUsername(muser.getName());
                     forum.setUserid(muser.uuid);
                     forum.setLikedby(new ArrayList<>());
-                    mdb4.collection(getString(R.string.forum)).document(uuid.toString()).set(forum)
+                    mdb4.collection(view.getContext().getString(R.string.forum)).document(uuid.toString()).set(forum)
                             .addOnFailureListener(getActivity(), new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getActivity(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), view.getContext().getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
 
                                 }
                             }).addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(getActivity(), getString(R.string.successforum), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), view.getContext().getString(R.string.successforum), Toast.LENGTH_SHORT).show();
                             fragmentInterface.goList(muser.getUuid());
                         }
                     });
@@ -110,11 +110,11 @@ public class NewForumFragment extends Fragment {
                 }
                 else if(edittitle.getText().toString().length()<=0)
                 {
-                    Toast.makeText(getContext(), getString(R.string.errortitle), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), view.getContext().getString(R.string.errortitle), Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    Toast.makeText(getContext(), getString(R.string.errordesc), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), view.getContext().getString(R.string.errordesc), Toast.LENGTH_SHORT).show();
                 }
 
 

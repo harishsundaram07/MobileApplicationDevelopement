@@ -91,17 +91,13 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_forum_list, container, false);
-        getActivity().setTitle(getString(R.string.formtitl));
+        getActivity().setTitle(view.getContext().getString(R.string.formtitl));
         functionInterface=  this;
         recyclerView=view.findViewById(R.id.recyclerView2);
         linearLayoutManager=new LinearLayoutManager(getContext());
@@ -113,7 +109,7 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
 
 
         mdb3=FirebaseFirestore.getInstance();
-        mdb3.collection(getString(R.string.forum)).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        mdb3.collection(view.getContext().getString(R.string.forum)).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 forumList.clear();
@@ -152,7 +148,7 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
                         @Override
                         public void onSuccess(Void aVoid) {
                             if(view.getContext()!=null)
-                                Toast.makeText(view.getContext(), getString(R.string.logged_out), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(view.getContext(), view.getContext().getString(R.string.logged_out), Toast.LENGTH_SHORT).show();
                             fragmentInterface.goHome();
 
                         }
@@ -160,7 +156,7 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             if(view.getContext()!=null)
-                                Toast.makeText(view.getContext(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(view.getContext(), view.getContext().getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -171,7 +167,7 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
             @Override
             public void onClick(View v) {
                 mdb2=FirebaseFirestore.getInstance();
-                mdb2.collection(getString(R.string.user)).document(muuid).get().addOnSuccessListener(getActivity(), new OnSuccessListener<DocumentSnapshot>() {
+                mdb2.collection(view.getContext().getString(R.string.user)).document(muuid).get().addOnSuccessListener(getActivity(), new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         muser=documentSnapshot.toObject(User.class);
@@ -181,7 +177,7 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
                 }).addOnFailureListener(getActivity(), new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(view.getContext(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), view.getContext().getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -198,16 +194,16 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
     @Override
     public void deleteforum(String mforumid) {
         mdb3=FirebaseFirestore.getInstance();
-        mdb3.collection(getString(R.string.forum)).document(mforumid).delete().addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
+        mdb3.collection(view.getContext().getString(R.string.forum)).document(mforumid).delete().addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(view.getContext(), getString(R.string.forumdeleted), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), view.getContext().getString(R.string.forumdeleted), Toast.LENGTH_SHORT).show();
 
             }
         }).addOnFailureListener(getActivity(), new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(view.getContext(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), view.getContext().getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -221,7 +217,7 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
             forum.getLikedby().remove(muuid);
         mdb3=FirebaseFirestore.getInstance();
         String likedby="likedby";
-        mdb3.collection(getString(R.string.forum)).document(forum.forumid).update(likedby,forum.getLikedby()).addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
+        mdb3.collection(view.getContext().getString(R.string.forum)).document(forum.forumid).update(likedby,forum.getLikedby()).addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 
@@ -230,7 +226,7 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
         }).addOnFailureListener(getActivity(), new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(view.getContext(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), view.getContext().getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -238,7 +234,7 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
     @Override
     public void gotoDetails(String muuid, Forum forum) {
         mdb2=FirebaseFirestore.getInstance();
-        mdb2.collection(getString(R.string.user)).document(muuid).get().addOnSuccessListener(getActivity(), new OnSuccessListener<DocumentSnapshot>() {
+        mdb2.collection(view.getContext().getString(R.string.user)).document(muuid).get().addOnSuccessListener(getActivity(), new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 muser=documentSnapshot.toObject(User.class);
@@ -248,7 +244,7 @@ public class ForumListFragment extends Fragment implements FunctionInterface{
         }).addOnFailureListener(getActivity(), new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(view.getContext(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), view.getContext().getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
             }
         });
 

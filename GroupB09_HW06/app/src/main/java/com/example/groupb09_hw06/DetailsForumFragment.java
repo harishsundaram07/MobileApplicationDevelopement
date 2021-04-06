@@ -25,6 +25,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.UUID;
 
@@ -119,7 +121,13 @@ public class DetailsForumFragment extends Fragment implements Commentfragmentint
         view.findViewById(R.id.buttonpost).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(editTextTextMultiLinecomment.getText().length()>0)
+                {
                     postcomment();
+                }
+                else
+                    Toast.makeText(getActivity(), view.getContext().getString(R.string.commedntadd), Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -132,7 +140,7 @@ public class DetailsForumFragment extends Fragment implements Commentfragmentint
     private void getcomment() {
         Comment comments;
         mdb6=FirebaseFirestore.getInstance();
-        mdb6.collection(getString(R.string.forum)).document(mforum.getForumid()).collection(getString(R.string.comment)).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        mdb6.collection(view.getContext().getString(R.string.forum)).document(mforum.getForumid()).collection(view.getContext().getString(R.string.comment)).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 commentArrayList.clear();
@@ -143,13 +151,20 @@ public class DetailsForumFragment extends Fragment implements Commentfragmentint
                             Comment comment = document.toObject(Comment.class);
                             commentArrayList.add(comment);
                         }
-                        textViewcommentsno.setText(commentArrayList.size()+" "+getString(R.string.comments));
+                        Collections.sort(commentArrayList, new Comparator<Comment>() {
+                            @Override
+                            public int compare(Comment o1, Comment o2) {
+                                return (-1)*(o1.getDate().compareTo(o2.getDate()));
+                            }
+                        });
+                        textViewcommentsno.setText(commentArrayList.size()+" "+view.getContext().getString(R.string.comments));
                         commentRecylcerAdapter = new CommentRecylcerAdapter(commentArrayList,muuid,mforum.getForumid(), commentfragmentinterface);
                         recylercomment.setAdapter(commentRecylcerAdapter);
                     }
                 }
                 else
                 {
+                    textViewcommentsno.setText(commentArrayList.size()+" "+view.getContext().getString(R.string.comments));
                     textViewnocomments.setVisibility(View.VISIBLE);
                     commentRecylcerAdapter = new CommentRecylcerAdapter(commentArrayList,muuid,mforum.getForumid(), commentfragmentinterface);
                     recylercomment.setAdapter(commentRecylcerAdapter);
@@ -163,6 +178,7 @@ public class DetailsForumFragment extends Fragment implements Commentfragmentint
 
 
     private void postcomment() {
+        view.findViewById(R.id.buttonpost).setEnabled(false);
         UUID uuid=UUID.randomUUID();
         Comment comment=new Comment();
         comment.setComment(editTextTextMultiLinecomment.getText().toString());
@@ -172,18 +188,20 @@ public class DetailsForumFragment extends Fragment implements Commentfragmentint
         comment.setName(muser.getName());
         comment.setUuid(muser.getUuid());
         mdb5=FirebaseFirestore.getInstance();
-        mdb5.collection(getString(R.string.forum)).document(mforum.getForumid()).collection(getString(R.string.comment)).document(uuid.toString()).set(comment).addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
+        mdb5.collection(view.getContext().getString(R.string.forum)).document(mforum.getForumid()).collection(view.getContext().getString(R.string.comment)).document(uuid.toString()).set(comment).addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getActivity(), getString(R.string.commedntadded), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), view.getContext().getString(R.string.commedntadded), Toast.LENGTH_SHORT).show();
                 editTextTextMultiLinecomment.setText("");
             }
         }).addOnFailureListener(getActivity(), new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), view.getContext().getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
             }
         });
+        view.findViewById(R.id.buttonpost).setEnabled(true);
+
     }
 
 
@@ -191,15 +209,15 @@ public class DetailsForumFragment extends Fragment implements Commentfragmentint
     @Override
     public void deletecomment(String mcommentId) {
         mdb5=FirebaseFirestore.getInstance();
-        mdb5.collection(getString(R.string.forum)).document(mforum.getForumid()).collection(getString(R.string.comment)).document(mcommentId).delete().addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
+        mdb5.collection(view.getContext().getString(R.string.forum)).document(mforum.getForumid()).collection(view.getContext().getString(R.string.comment)).document(mcommentId).delete().addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getActivity(), getString(R.string.commedntdeleted), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), view.getContext().getString(R.string.commedntdeleted), Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(getActivity(), new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), view.getContext().getString(R.string.errormessage), Toast.LENGTH_SHORT).show();
             }
         });
 
