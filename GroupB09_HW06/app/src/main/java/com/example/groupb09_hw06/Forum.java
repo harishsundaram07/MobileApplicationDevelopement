@@ -1,9 +1,11 @@
+// Assignment : HW 06
+//File Name : GroupB09_HW06
+//Full name of the student : HARIKRISHNAN SUNDARAM  & MALHAR JOSHI
+
 package com.example.groupb09_hw06;
 
 
-// Assignment : InClass 08
-//File Name : GroupB09_InClass08
-//Full name of the student : HARIKRISHNAN SUNDARAM  & MALHAR JOSHI
+
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,5 +1,5 @@
-// Assignment : InClass 08
-//File Name : GroupB09_InClass08
+// Assignment : HW 06
+//File Name : GroupB09_HW06
 //Full name of the student : HARIKRISHNAN SUNDARAM  & MALHAR JOSHI
 
 
