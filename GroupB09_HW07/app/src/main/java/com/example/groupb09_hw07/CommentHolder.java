@@ -1,0 +1,72 @@
+// Assignment : HW 07
+//File Name : GroupB09_HW07
+//Full name of the student : HARIKRISHNAN SUNDARAM  & MALHAR JOSHI
+
+
+
+package com.example.groupb09_hw07;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class CommentHolder extends RecyclerView.ViewHolder {
+    TextView textViewcreatedBy1;
+    TextView textViewcomment1;
+    TextView textViewdate1;
+    ImageView imageViewdel1;
+   Commentfragmentinterface commentfragmentinterface;
+    Comment comment;
+    User muser;
+    User mloggedinuser;
+    Photos photos;
+    ArrayList<Comment> commentArrayList;
+
+
+    public CommentHolder(@NonNull View itemView,Commentfragmentinterface commentfragmentinterface) {
+        super(itemView);
+
+        if (itemView!=null)
+        {
+            textViewcreatedBy1=itemView.findViewById(R.id.textViewcreatedBy1);
+            textViewcomment1=itemView.findViewById(R.id.textViewcomment1);
+            textViewdate1=itemView.findViewById(R.id.textViewdate1);
+            imageViewdel1=itemView.findViewById(R.id.imageViewdel1);
+
+
+        }
+        this.commentfragmentinterface=commentfragmentinterface;
+
+        imageViewdel1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder=new AlertDialog.Builder(itemView.getContext());
+                builder
+                        .setMessage(R.string.deleteconfrim)
+                        .setPositiveButton(itemView.getContext().getString(R.string.OK), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                commentfragmentinterface.deletecomment(comment,mloggedinuser,muser,photos);
+                            }
+                        }).setNegativeButton(itemView.getContext().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.create().show();
+            }
+        });
+
+    }
+
+
+}
